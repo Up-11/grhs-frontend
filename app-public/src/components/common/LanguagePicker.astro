@@ -1,0 +1,24 @@
+---
+import { languages } from '@i18n/ui'
+import { getRouteFromUrl, getLangFromUrl } from '@i18n/utils'
+import { useLocale } from '@i18n/useLocale'
+
+const { translatePath } = useLocale(Astro.url)
+
+const route = getRouteFromUrl(Astro.url)
+
+const currentLang = getLangFromUrl(Astro.url)
+---
+
+<ul>
+	{
+		Object.entries(languages).map(
+			([lang, label]) =>
+				lang !== currentLang && (
+					<li>
+						<a href={translatePath(`/${route ? route : ''}`, lang)}>{label}</a>
+					</li>
+				)
+		)
+	}
+</ul>

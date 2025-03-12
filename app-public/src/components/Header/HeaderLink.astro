@@ -1,0 +1,47 @@
+---
+import { useLocale } from '@i18n/useLocale'
+import { cn } from '@utils/css'
+
+interface Props {
+	href: string
+	title: string
+	isActive?: boolean
+}
+
+const { translatePath } = useLocale(Astro.url)
+
+const { title, href, isActive } = Astro.props
+---
+
+<a
+	class={cn(
+		'font-semibold text-lg select-none hover:text-green-600 transition-colors hover-underline-animation',
+		isActive && 'text-green-700'
+	)}
+	href={translatePath(href)}>{title}</a
+>
+
+<style>
+	.hover-underline-animation {
+		display: inline-block;
+		position: relative;
+	}
+
+	.hover-underline-animation::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: oklch(0.627 0.194 149.214);
+		transform-origin: bottom right;
+		transition: transform 0.35s ease-out;
+	}
+
+	.hover-underline-animation:hover::after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
+</style>

@@ -1,0 +1,100 @@
+---
+import { useLocale } from '@i18n/useLocale'
+import logo from '../../assets/logo_svg.svg'
+import HeaderLink from './HeaderLink.astro'
+import { ROUTES } from '@config/routes'
+import MdiMenu from '@icons/MdiMenu.astro'
+import MdiClose from '@icons/MdiClose.astro'
+import LanguagePicker from '@components/common/LanguagePicker.astro'
+import { Image } from 'astro:assets'
+
+interface MenuLink {
+	title: string
+	href: string
+}
+
+const { t, translatePath } = useLocale(Astro.url)
+
+const menuLinks: MenuLink[] = [
+	{
+		title: t('nav.menu'),
+		href: ROUTES.menu
+	},
+	{
+		title: t('nav.addresses'),
+		href: ROUTES.addresses
+	},
+	{
+		title: t('nav.events'),
+		href: ROUTES.events
+	},
+	{
+		title: t('nav.about'),
+		href: ROUTES.about
+	}
+]
+---
+
+<header
+	class='flex p-4 gap-4 items-center justify-between h-24 container mx-auto'
+>
+	<div class='flex gap-4 items-center justify-between'>
+		<a
+			class='hover:scale-105 transition-transform'
+			href={translatePath(ROUTES.home)}
+		>
+			<Image src={logo} alt='logo' width='60' height='60' />
+		</a>
+
+		<nav class='flex gap-4 max-md:hidden'>
+			{
+				menuLinks.map(item => (
+					<HeaderLink
+						isActive={Astro.url.pathname.includes(item.href)}
+						title={item.title}
+						href={item.href}
+					/>
+				))
+			}
+		</nav>
+	</div>
+	<div class='max-md:hidden'>
+		<div
+			class='tooltip tooltip-left tooltip-success'
+			data-tip={t('tooltip.lang')}
+		>
+			<LanguagePicker />
+		</div>
+	</div>
+	<div class='drawer md:hidden drawer-end w-fit'>
+		<input id='my-drawer' type='checkbox' class='drawer-toggle' />
+		<div class='drawer-content'>
+			<label for='my-drawer'>
+				<MdiMenu class='size-12 rounded-lg p-1' />
+			</label>
+		</div>
+		<div class='drawer-side'>
+			<label for='my-drawer' aria-label='close sidebar' class='drawer-overlay'
+			></label>
+			<ul
+				class='menu w-full bg-base-200 flex items-center flex-col gap-5 text-base-content min-h-full p-4'
+			>
+				<label for='my-drawer' aria-label='close sidebar' class='self-end p-2'>
+					<MdiClose class='size-12 rounded-lg p-1' /></label
+				>
+				<a
+					class='hover:scale-105 transition-transform'
+					href={translatePath(ROUTES.home)}
+				>
+					<img src={logo.src} alt='logo' width='50' height='50' />
+				</a>
+				{
+					menuLinks.map(item => (
+						<HeaderLink title={item.title} href={item.href} />
+					))
+				}
+				<LanguagePicker />
+			</ul>
+		</div>
+	</div>
+</header>
