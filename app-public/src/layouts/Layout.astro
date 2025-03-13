@@ -12,6 +12,8 @@ const siteName = 'Сеть кофеен'
 
 import { getLangFromUrl } from '../i18n/utils'
 import AppHeader from '../components/Header/AppHeader.astro'
+import { ClientRouter } from 'astro:transitions'
+import AppFooter from '@components/Footer/AppFooter.astro'
 
 const lang = getLangFromUrl(Astro.url)
 ---
@@ -19,6 +21,7 @@ const lang = getLangFromUrl(Astro.url)
 <!doctype html>
 <html lang={lang} data-theme='light'>
 	<head>
+		<ClientRouter />
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1' />
 		<link rel='icon' type='image/svg+xml' href='/logo_svg.svg' />
@@ -46,5 +49,6 @@ const lang = getLangFromUrl(Astro.url)
 	<body>
 		<AppHeader />
 		<slot />
+		<AppFooter />
 	</body>
 </html>

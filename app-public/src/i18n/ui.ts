@@ -13,13 +13,19 @@ export const ui = {
 		'nav.addresses': 'Addresses',
 		'nav.events': 'Events',
 		'nav.about': 'About us',
-		'tooltip.lang': 'Change language'
+		'tooltip.lang': 'Change language',
+		'event.button': 'More',
+		'event.closest-title': 'Closest events',
+		'event.past-title': 'Past events'
 	},
 	ru: {
 		'nav.menu': 'Меню',
 		'nav.addresses': 'Адреса',
 		'nav.events': 'События',
 		'nav.about': 'Кофейня',
-		'tooltip.lang': 'Поменять язык'
+		'tooltip.lang': 'Поменять язык',
+		'event.button': 'Подробнее',
+		'event.closest-title': 'Ближайшие события',
+		'event.past-title': 'Прошедшие события'
 	}
 } as const

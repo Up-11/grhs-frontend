@@ -16,7 +16,12 @@ const currentLang = getLangFromUrl(Astro.url)
 			([lang, label]) =>
 				lang !== currentLang && (
 					<li>
-						<a href={translatePath(`/${route ? route : ''}`, lang)}>{label}</a>
+						<a
+							class='text-gray-400 hover:text-black'
+							href={translatePath(`/${route ? route : ''}`, lang)}
+						>
+							{label}
+						</a>
 					</li>
 				)
 		)

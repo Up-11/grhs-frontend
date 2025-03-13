@@ -1,0 +1,13 @@
+---
+import AppEvents from '@components/Events/Vue/AppEvents.vue'
+import CoffeeLoading from '@icons/CoffeeLoading.astro'
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout title='Events'>
+	<AppEvents client:only='vue'>
+		<div slot='fallback'>
+			<CoffeeLoading />
+		</div>
+	</AppEvents>
+</Layout>

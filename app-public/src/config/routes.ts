@@ -1,3 +1,5 @@
+import { useLocale } from '@i18n/useLocale'
+
 export const ROUTES = {
 	home: '/',
 	menu: '/menu',

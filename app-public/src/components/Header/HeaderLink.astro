@@ -16,7 +16,7 @@ const { title, href, isActive } = Astro.props
 <a
 	class={cn(
 		'font-semibold text-lg select-none hover:text-green-600 transition-colors hover-underline-animation',
-		isActive && 'text-green-700'
+		isActive && 'text-green-600'
 	)}
 	href={translatePath(href)}>{title}</a
 >

@@ -4,3 +4,32 @@
 		light --default,
 		dark --prefersdark;
 }
+@utility btn {
+	@apply rounded-4xl;
+}
+
+@utility btn-success {
+	@apply border-white text-white hover:bg-black/40;
+}
+
+.container-max {
+	@apply w-full max-w-[40rem] sm:max-w-full md:max-w-full lg:max-w-[80rem] xl:max-w-[96rem];
+}
+
+body::-webkit-scrollbar {
+	width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: green;
+	border-radius: 5px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+	background: darkgreen;
+}

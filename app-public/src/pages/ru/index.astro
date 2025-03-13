@@ -1,5 +1,40 @@
 ---
+import MainBlock from '@components/common/MainBlock.astro'
 import Layout from '../../layouts/Layout.astro'
+import '../../styles/global.css'
+import { useLocale } from '@i18n/useLocale'
+import { ROUTES } from '@config/routes'
+import type { MainBlockType } from 'src/types/types'
+
+const { translatePath } = useLocale(Astro.url)
+
+const items: MainBlockType[] = [
+	{
+		imageUrl:
+			'https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-97315.jpg',
+		title: 'The Spring Edit',
+		description: 'Fresh flavors, familiar joy.',
+		type: 'banner',
+		buttonText: 'Открыть',
+		href: translatePath(ROUTES.menu),
+		imageSide: 'left'
+	},
+	{
+		imageUrl:
+			'https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-97180.jpg',
+		title: 'Our smoothest, brightest coffee yet',
+		description:
+			'Discover the people and places behind the new Starbucks® Sunsera Blend™ as it makes its way from farm to cup.',
+		type: 'banner',
+		buttonText: 'Открыть',
+		href: translatePath(ROUTES.menu),
+		imageSide: 'right'
+	}
+]
 ---
 
-<Layout title='Главная' />
+<Layout title='Главная'>
+	<div class='container-max mx-auto flex flex-col gap-4'>
+		{items.map(item => <MainBlock {...item} />)}
+	</div>
+</Layout>

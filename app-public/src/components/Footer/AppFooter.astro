@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets'
+import image from '../../assets/Drink_love-02-02.svg'
+import { useLocale } from '@i18n/useLocale'
+import LanguagePicker from '@components/common/LanguagePicker.astro'
+import { ROUTES } from '@config/routes'
+import SocialIcons from './SocialIcons.astro'
+
+const { t } = useLocale(Astro.url)
+---
+
+<div class='w-full mt-4'>
+	<footer class='p-4 rounded-lg bg-gray-50 shadow md:px-6 md:py-8'>
+		<div class='sm:flex sm:items-center sm:justify-between'>
+			<Image
+				src={image}
+				class='mr-4'
+				width='200'
+				alt='Drink love Make Coffee'
+			/>
+			<ul class='flex flex-wrap items-center mb-6 sm:mb-0'>
+				<li>
+					<a
+						href={ROUTES.about}
+						class='mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400'
+						>{t('nav.about')}</a
+					>
+				</li>
+				<li>
+					<a
+						href={ROUTES.addresses}
+						class='mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400'
+						>{t('nav.addresses')}</a
+					>
+				</li>
+				<li>
+					<a
+						href={ROUTES.events}
+						class='mr-4 text-sm text-gray-500 hover:underline md:mr-6 dark:text-gray-400'
+						>{t('nav.events')}</a
+					>
+				</li>
+				<li>
+					<a
+						href={ROUTES.menu}
+						class='text-sm text-gray-500 hover:underline dark:text-gray-400'
+						>{t('nav.menu')}</a
+					>
+				</li>
+				<li class='ml-5'>
+					<LanguagePicker />
+				</li>
+			</ul>
+		</div>
+		<hr
+			class='my-6 border-gray-200 flex sm:mx-auto dark:border-gray-700 lg:my-8'
+		/>
+		<div class='justify-between flex items-center'>
+			<span
+				class='block text-sm text-gray-500 sm:text-center dark:text-gray-400'
+				>© 2022 <a
+					href='https://flowbite.com'
+					target='_blank'
+					class='hover:underline'>ООО Грин Хаус Кофе © 2012 - 2024</a
+				>
+			</span>
+			<SocialIcons />
+		</div>
+	</footer>
+</div>
