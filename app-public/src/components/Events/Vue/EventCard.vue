@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import { useLocale } from '@i18n/useLocale'
-import { inject } from 'vue'
+import dayjs from 'dayjs'
+import { computed, inject } from 'vue'
+
+import type { IEventCard } from './types'
+
+const props = defineProps<{ event: IEventCard }>()
 
 const url = inject<URL>('url')
 const { t } = useLocale(url!)
+
+const formattedDate = computed(() => dayjs(props.event.date).format('DD/MM'))
 </script>
 
 <template>
@@ -15,7 +22,7 @@ const { t } = useLocale(url!)
 				class="relative overflow-hidden text-gray-700 bg-white bg-clip-border h-70"
 			>
 				<img
-					src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80"
+					:src="event.imageUrl"
 					alt="card-image"
 					class="object-cover w-full h-full"
 				/>
@@ -25,14 +32,14 @@ const { t } = useLocale(url!)
 					<h2
 						class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
 					>
-						Apple AirPods
+						{{ event.name }}
 					</h2>
+					<p class="text-green-700 font-semibold">{{ formattedDate }}</p>
 				</div>
 				<p
 					class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75"
 				>
-					With plenty of talk and listen time, voice-activated Siri access, and
-					an available wireless charging case.
+					{{ event.description }}
 				</p>
 			</div>
 			<div class="p-6 pt-0">

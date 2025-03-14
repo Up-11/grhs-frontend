@@ -16,7 +16,19 @@ export const ui = {
 		'tooltip.lang': 'Change language',
 		'event.button': 'More',
 		'event.closest-title': 'Closest events',
-		'event.past-title': 'Past events'
+		'event.past-title': 'Past events',
+		'month.january': 'January',
+		'month.february': 'February',
+		'month.march': 'March',
+		'month.april': 'April',
+		'month.may': 'May',
+		'month.june': 'June',
+		'month.july': 'July',
+		'month.august': 'August',
+		'month.september': 'September',
+		'month.october': 'October',
+		'month.november': 'November',
+		'month.december': 'December'
 	},
 	ru: {
 		'nav.menu': 'Меню',
@@ -26,6 +38,18 @@ export const ui = {
 		'tooltip.lang': 'Поменять язык',
 		'event.button': 'Подробнее',
 		'event.closest-title': 'Ближайшие события',
-		'event.past-title': 'Прошедшие события'
+		'event.past-title': 'Прошедшие события',
+		'month.january': 'Январь',
+		'month.february': 'Февраль',
+		'month.march': 'Март',
+		'month.april': 'Апрель',
+		'month.may': 'Май',
+		'month.june': 'Июнь',
+		'month.july': 'Июль',
+		'month.august': 'Август',
+		'month.september': 'Сентябрь',
+		'month.october': 'Октябрь',
+		'month.november': 'Ноябрь',
+		'month.december': 'Декабрь'
 	}
 } as const
