@@ -1,0 +1,79 @@
+<template>
+	<div class="loader">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="cup"><span></span></div>
+	</div>
+</template>
+<style>
+.loader {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 80px;
+	margin: auto;
+	height: 58vh;
+}
+@keyframes wave {
+	0% {
+		opacity: 0;
+		transform: translateY(15px);
+	}
+	50% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-15px);
+	}
+}
+.loader ul {
+	margin: 0 0 10px 0;
+	padding: 0;
+	list-style: none;
+	width: 60px;
+	text-align: center;
+	animation: wave 2.5s infinite linear;
+	animation-fill-mode: forwards;
+}
+.loader li {
+	display: inline-block;
+	background: #42413c;
+	height: 30px;
+	width: 9px;
+	border-radius: 0 100%;
+	transform: rotate(12deg);
+}
+.cup {
+	background: #0fad51;
+	width: 60px;
+	height: 54px;
+	border-radius: 0 0 50% 50%;
+	position: relative;
+}
+.cup:before {
+	content: '';
+	position: absolute;
+	width: 66px;
+	height: 20px;
+	border-radius: 50%;
+	background: inherit;
+	left: -3px;
+	top: -10px;
+}
+.cup:after {
+	content: '';
+	position: absolute;
+	width: 56px;
+	height: 12px;
+	border-radius: 50%;
+	background: #3a2f28;
+	left: 2px;
+	top: -6px;
+}
+</style>
