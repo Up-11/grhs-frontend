@@ -48,53 +48,62 @@ const onWheel = (event: WheelEvent) => {
 
 	scrollContainer.scrollLeft += event.deltaY
 }
-
 const setCurrentTab = (tab: ITab) => {
 	if (currentTab.value.value === tab.value) {
 		return
+	}
+
+	currentTab.value = tab
+	clearCurrentEventDate()
+
+	if (currentTab.value.value === 'closest') {
+		const today = new Date()
+		today.setHours(0, 0, 0, 0)
+
+		startDate.value = new Date(today)
+		startDate.value.setDate(today.getDate() + 1)
+
+		lastDateInput.value = new Date(lastEventDate)
 	} else {
-		currentTab.value = tab
-		clearCurrentEventDate()
-		if (currentTab.value.value === 'closest') {
-			startDate.value = new Date()
-			lastDateInput.value = new Date(lastEventDate)
-		} else {
-			lastDateInput.value = new Date(startDate.value)
-			startDate.value = new Date(firstEventDate)
-		}
+		lastDateInput.value = new Date(startDate.value)
+		startDate.value = new Date(firstEventDate)
 	}
 }
 
 const filteredEvents = (month: string) => {
-	return events.filter(curr => {
-		const currDate = new Date(curr.date)
-		const currMonth = formatMonth(currDate)
+	return events
+		.filter(curr => {
+			const currDate = new Date(curr.date)
+			const currMonth = formatMonth(currDate)
 
-		if (currMonth === month) {
-			if (currentTab.value.value === 'closest') {
-				return currDate >= new Date()
-			} else if (currentTab.value.value === 'past') {
-				return currDate < new Date()
+			if (currMonth === month) {
+				if (currentTab.value.value === 'closest') {
+					return currDate.getDate() >= new Date().getDate()
+				} else if (currentTab.value.value === 'past') {
+					return currDate < new Date()
+				}
 			}
-		}
 
-		return false
-	})
+			return false
+		})
+		.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 }
 
 const dayEvents = computed(() => {
 	if (!currentEventDate.value) return []
 
-	return events.filter(curr => {
-		const currDate = new Date(curr.date)
-		const selectedDate = new Date(currentEventDate.value!)
+	return events
+		.filter(curr => {
+			const currDate = new Date(curr.date)
+			const selectedDate = new Date(currentEventDate.value!)
 
-		return (
-			currDate.getFullYear() === selectedDate.getFullYear() &&
-			currDate.getMonth() === selectedDate.getMonth() &&
-			currDate.getDate() === selectedDate.getDate()
-		)
-	})
+			return (
+				currDate.getFullYear() === selectedDate.getFullYear() &&
+				currDate.getMonth() === selectedDate.getMonth() &&
+				currDate.getDate() === selectedDate.getDate()
+			)
+		})
+		.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 })
 
 const setIsActive = (day: Date) => {

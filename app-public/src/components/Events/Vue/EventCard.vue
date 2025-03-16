@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
 import dayjs from 'dayjs'
 import { computed, inject } from 'vue'
@@ -8,7 +9,7 @@ import type { IEventCard } from './types'
 const props = defineProps<{ event: IEventCard }>()
 
 const url = inject<URL>('url')
-const { t } = useLocale(url!)
+const { t, translatePath } = useLocale(url!)
 
 const formattedDate = computed(() => dayjs(props.event.date).format('DD/MM'))
 </script>
@@ -43,9 +44,12 @@ const formattedDate = computed(() => dayjs(props.event.date).format('DD/MM'))
 				</p>
 			</div>
 			<div class="p-6 pt-0">
-				<button class="btn btn-outline border-green-600 text-green-800">
+				<a
+					:href="translatePath(ROUTES.currentEvent(event.id))"
+					class="btn btn-outline border-green-600 text-green-800"
+				>
 					{{ t('event.button') }}
-				</button>
+				</a>
 			</div>
 		</div>
 	</div>

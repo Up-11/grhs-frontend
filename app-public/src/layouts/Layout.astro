@@ -46,9 +46,11 @@ const lang = getLangFromUrl(Astro.url)
 		</style></head
 	>
 
-	<body>
+	<body class='flex flex-col h-screen'>
 		<AppHeader />
-		<slot />
+		<main class='flex-1'>
+			<slot />
+		</main>
 		<AppFooter />
 	</body>
 </html>

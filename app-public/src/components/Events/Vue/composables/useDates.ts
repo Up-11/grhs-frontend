@@ -19,8 +19,11 @@ export const useDates = () => {
 		'December'
 	]
 
-	const startDate = ref(new Date())
-
+	const today = new Date()
+	today.setHours(0, 0, 0, 0)
+	const startDate = ref(new Date(today))
+	startDate.value = new Date(today)
+	startDate.value.setDate(today.getDate() + 1)
 	const lastDateInput = ref(new Date('2025-04-16'))
 
 	const currentEventDate = ref<Date | null>(null)
@@ -35,9 +38,9 @@ export const useDates = () => {
 		currentEventDate.value = null
 	}
 
-	const filteredMonths = computed(() => {
-		return months.slice(startIndex.value, lastIndex.value + 1)
-	})
+	const filteredMonths = computed(() =>
+		months.slice(startIndex.value, lastIndex.value + 1)
+	)
 
 	const days = computed(() => {
 		const eventDates = new Set(events.map(event => event.date))
@@ -47,15 +50,19 @@ export const useDates = () => {
 		let currentDate = new Date(startDate.value)
 
 		while (currentDate <= lastDate) {
-			const formattedDate = currentDate.toISOString().split('T')[0]
-			if (eventDates.has(formattedDate)) {
-				result.push(new Date(currentDate))
+			const formattedDate = new Date(currentDate.toISOString().split('T')[0])
+
+			if (eventDates.has(formattedDate.toISOString().split('T')[0])) {
+				result.push(formattedDate)
 			}
+
+			currentDate = new Date(currentDate)
 			currentDate.setDate(currentDate.getDate() + 1)
 		}
 
 		return result
 	})
+
 	const groupedDays = computed(() => {
 		const groups: Record<number, Date[]> = {}
 

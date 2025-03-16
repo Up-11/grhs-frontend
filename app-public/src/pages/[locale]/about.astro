@@ -1,0 +1,8 @@
+---
+import { useLocale } from '@i18n/useLocale'
+import Layout from '@layouts/Layout.astro'
+
+const { t } = useLocale(Astro.url)
+---
+
+<Layout title={t('nav.about')}>coffee</Layout>

@@ -1,0 +1,49 @@
+---
+import { events } from '@components/Events/Vue/types'
+import { ROUTES } from '@config/routes'
+import { useLocale } from '@i18n/useLocale'
+import Layout from '@layouts/Layout.astro'
+
+const { id } = Astro.params
+const { t, translatePath } = useLocale(Astro.url)
+
+const currentEvent = events.find(event => event.id === id)
+---
+
+<Layout title={currentEvent?.name || '404'}>
+	<div class=''>
+		<div class='container mx-auto'>
+			<div class='breadcrumbs text-sm'>
+				<ul>
+					<li>
+						<a href={translatePath(ROUTES.events)}>{t('nav.events')}</a>
+					</li>
+					<li>{currentEvent?.name}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div
+			class='w-full h-[550px] px-2 flex items-center justify-center overflow-hidden'
+		>
+			<img
+				src={currentEvent?.imagePreview}
+				alt='Event preview'
+				class='w-full h-full object-cover rounded-lg'
+			/>
+		</div>
+		<div
+			class='container mx-auto flex flex-col justify-center items-center mt-10'
+		>
+			<h1 class='text-3xl font-semibold'>{currentEvent?.name}</h1>
+
+			<div class='mt-4 flex flex-col max-w-200 gap-2'>
+				{
+					Object.values(currentEvent?.content || {}).map(curr => (
+						<p class='text-xl font-medium text-center'>{curr}</p>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</Layout>

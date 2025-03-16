@@ -6,7 +6,7 @@ import { useLocale } from '@i18n/useLocale'
 import { ROUTES } from '@config/routes'
 import type { MainBlockType } from 'src/types/types'
 
-const { translatePath } = useLocale(Astro.url)
+const { translatePath, t } = useLocale(Astro.url)
 
 const items: MainBlockType[] = [
 	{
@@ -33,7 +33,7 @@ const items: MainBlockType[] = [
 ]
 ---
 
-<Layout title='Главная'>
+<Layout title={t('nav.index')}>
 	<div class='container-max mx-auto flex flex-col gap-4'>
 		{items.map(item => <MainBlock {...item} />)}
 	</div>

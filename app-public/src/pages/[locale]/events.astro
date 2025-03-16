@@ -1,10 +1,13 @@
 ---
 import AppEvents from '@components/Events/Vue/AppEvents.vue'
+import { useLocale } from '@i18n/useLocale'
 import CoffeeLoading from '@icons/CoffeeLoading.astro'
 import Layout from '@layouts/Layout.astro'
+
+const { t } = useLocale(Astro.url)
 ---
 
-<Layout title='События'>
+<Layout title={t('nav.events')}>
 	<AppEvents client:only='vue'>
 		<div slot='fallback'>
 			<CoffeeLoading />
