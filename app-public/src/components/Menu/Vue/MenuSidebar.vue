@@ -6,9 +6,11 @@ defineProps<{ menuItems: IMenu[]; currentId: string }>()
 </script>
 
 <template>
-	<aside class="sticky top-5 self-start">
-		<h2 class="text-2xl font-semibold">Категории</h2>
-		<section class="flex flex-col gap-1 mt-5">
+	<aside class="md:sticky bg-white z-10 bottom-20 top-0 md:top-5 self-start">
+		<h2 class="text-2xl font-semibold max-md:hidden cursor-default">
+			Категории
+		</h2>
+		<section class="flex flex-col gap-1 my-5">
 			<SidebarItem
 				v-for="item in menuItems"
 				:item="item"

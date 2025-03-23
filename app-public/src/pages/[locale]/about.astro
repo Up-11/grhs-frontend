@@ -1,8 +1,122 @@
 ---
+import AboutGridItem from '@components/common/AboutGridItem.astro'
+import SocialIcons from '@components/Footer/SocialIcons.astro'
 import { useLocale } from '@i18n/useLocale'
 import Layout from '@layouts/Layout.astro'
 
 const { t } = useLocale(Astro.url)
+
+const items = [
+	{
+		content:
+			'Мы сфокусировались на вкусном и высококачественном кофе. Тщательный отбор позволяет выбрать только лучшие кофейные зерна и обжарить их так, чтобы раскрыть самые изысканные нотки вкуса и передать их каждой чашке.'
+	},
+	{
+		content:
+			'Мы готовим наш кофе с особым отношением к каждому гостю и помогаем найти нужные инструменты и технологии для того, чтобы вы смогли приготовить лучший кофе где угодно, особенно у себя дома.'
+	},
+	{
+		content:
+			'Да, мы одержимы качеством кофе. Для этого мы используем только свежий урожай зерна из разных уголков Мира, каждый из которых оставляет свою неповторимую историю во вкусе.'
+	},
+	{
+		content:
+			'Наша команда живет кофе и идеей развития кофейной культуры. Мы многому учимся сами и готовы разделить знания с нашими гостями. Мы работаем на лучшем оборудовании и используем передовые инструменты и технологии.'
+	},
+	{
+		content:
+			'Green House — это кофейня с особым отношением к своим гостям. Мы по-настоящему рады каждому и хотим каждого сделать чуточку счастливее. Вы не можете купить счастье, но вы можете купить кофе. Это так просто, чтобы стать счастливее.'
+	}
+]
 ---
 
-<Layout title={t('nav.about')}>coffee</Layout>
+<Layout title={t('nav.about')}>
+	<div
+		class='w-full h-[550px] px-2 flex items-center justify-center overflow-hidden'
+	>
+		<img
+			src='/src/assets/XXXL.webp'
+			alt='Event preview'
+			class='w-full h-full object-cover rounded-lg'
+		/>
+	</div>
+	<section
+		class='flex flex-col justify-center items-center text-center max-w-200 mx-auto'
+	>
+		<h2 class='text-3xl font-semibold mt-2'>Меняем кофейные привычки</h2>
+		<h3 class='mt-2 text-lg font-medium'>
+			Green House — сеть кофеен с живой и позитивной атмосферой. Сейчас сеть
+			объединяет 125 кофеен. Green House не просто кофейня, это философия,
+			которой мы делимся с каждым гостем.
+		</h3>
+	</section>
+
+	<section class='container mx-auto'>
+		<h2 class='text-3xl font-semibold mt-2'>Наша философия</h2>
+		<div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
+			{
+				items.map((item, index) => (
+					<AboutGridItem position={index + 1} content={item.content} />
+				))
+			}
+		</div>
+	</section>
+
+	<div class='text-center max-w-md mx-auto mt-5'>
+		<h2 class='text-2xl font-bold mb-6'>Напишите нам:</h2>
+
+		<div class='space-y-6 text-lg'>
+			<p>
+				для отзывов: <a
+					href='mailto:quality.control@grnhs.ru'
+					class='text-green-600 underline'>quality.control@grnhs.ru</a
+				>
+			</p>
+
+			<p>
+				по франшизе: <a
+					href='mailto:franch@grnhs.ru'
+					class='text-green-600 underline'>franch@grnhs.ru</a
+				>
+			</p>
+
+			<p>
+				для поставщиков кондитерской и пр. продукции:<br />
+				<a href='mailto:products@grnhs.ru' class='text-green-600 underline'
+					>products@grnhs.ru</a
+				>
+			</p>
+
+			<p>
+				по вопросам рекламы и продвижения:<br />
+				<a href='mailto:reklama@grnhs.ru' class='text-green-600 underline'
+					>reklama@grnhs.ru</a
+				>
+			</p>
+
+			<p>
+				по вопросам оптовых закупок: <a
+					href='mailto:opt@grnhs.ru'
+					class='text-green-600 underline'>opt@grnhs.ru</a
+				>
+			</p>
+
+			<p>
+				по вопросам работы: <a
+					href='mailto:hr@grnhs.ru'
+					class='text-green-600 underline'>hr@grnhs.ru</a
+				>
+			</p>
+
+			<p>
+				по общим вопросам: <a
+					href='mailto:hello@grnhs.ru'
+					class='text-green-600 underline'>hello@grnhs.ru</a
+				>
+			</p>
+		</div>
+		<div class='mt-5'>
+			<SocialIcons />
+		</div>
+	</div>
+</Layout>

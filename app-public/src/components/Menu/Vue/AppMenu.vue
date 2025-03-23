@@ -4,30 +4,7 @@ import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 
 import MenuCard from './MenuCard.vue'
 import MenuSidebar from './MenuSidebar.vue'
-import { type IMenu, products } from './types'
-
-const sidebarItems: IMenu[] = [
-	{
-		title: 'Сезонные напитки',
-		id: 'seasonal-drinks'
-	},
-	{
-		title: 'Авторские напитки',
-		id: 'authors-drinks'
-	},
-	{
-		title: 'Кофе',
-		id: 'coffee'
-	},
-	{
-		title: 'Горячие напитки',
-		id: 'hot-drinks'
-	},
-	{
-		title: 'Холодные напитки',
-		id: 'cold-drinks'
-	}
-]
+import { type IMenu, products, sidebarItems } from './types'
 
 const sectionRefs = ref<HTMLElement[]>([])
 const currentId = ref<string>('')
@@ -76,7 +53,9 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="grid mb-15 grid-cols-[200px_1fr] gap-5 mt-4">
+	<div
+		class="grid max-md:p-4 mb-15 grid-cols-1 md:grid-cols-[200px_1fr] gap-5 mt-4"
+	>
 		<MenuSidebar :current-id="currentId" :menu-items="sidebarItems" />
 
 		<div class="flex flex-col gap-25">
@@ -84,7 +63,10 @@ onMounted(() => {
 				<h2 ref="target" class="text-4xl font-bold" :id="item.id">
 					{{ item.title }}
 				</h2>
-				<div class="grid grid-cols-4 gap-6">
+
+				<div
+					class="grid grid-cols-1 max-md:justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+				>
 					<MenuCard
 						v-for="product in products.filter(p => p.category === item.id)"
 						:key="product.id"

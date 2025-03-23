@@ -1,0 +1,44 @@
+---
+import { useLocale } from '@i18n/useLocale'
+import type { IProductCard } from '../Vue/types'
+
+interface Props {
+	item: IProductCard
+}
+
+const {
+	item: { name, category, composition, nutrition, price, volumes }
+} = Astro.props
+
+const { t } = useLocale(Astro.url)
+
+const joinedComposition = composition.join(' / ')
+const joinedVolumes = Object.entries(volumes)
+	.map(([key, value]) => `${t('modal.ml')}: ${value}`)
+	.join(' / ')
+
+const joinedNutrition = Object.entries(nutrition)
+	.map(
+		([key, values]) =>
+			`${t(`nutrition.${key}`)}: ${values.value} - ${values.max}`
+	)
+	.join(' / ')
+
+const joinedPrice = `${price.value} - ${price.max}`
+---
+
+<div>
+	<h2 class='border-b border-gray-300 text-xl'>{name}</h2>
+	<span class='text-gray-400 text-sm tracking-wide'>
+		{joinedComposition},
+	</span>
+	<span class='text-gray-400 text-sm tracking-wide'>
+		{joinedVolumes},
+	</span>
+	<span class='text-gray-400 text-sm tracking-wide'>
+		{joinedNutrition},
+	</span>
+	<span class='text-gray-400 text-sm tracking-wide'>
+		{t('modal.price')}: {joinedPrice}
+	</span>
+</div>

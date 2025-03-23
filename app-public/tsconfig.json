@@ -7,6 +7,10 @@
   "exclude": [
     "dist"
   ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./node_modules/@yandex/ymaps3-types"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
@@ -33,8 +37,12 @@
       ],
       "@icons/*": [
         "src/icons/*"
+      ],
+      "ymaps3": [
+        "./node_modules/@yandex/ymaps3-types"
       ]
     },
-    "jsx": "preserve"
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   }
 }

@@ -6,4 +6,5 @@ export interface MainBlockType {
 	buttonText: string
 	href: string
 	imageSide: 'left' | 'right'
+	position: number
 }

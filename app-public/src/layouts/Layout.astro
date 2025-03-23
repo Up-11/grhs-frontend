@@ -5,9 +5,10 @@ import '@fontsource-variable/inter'
 
 interface Props {
 	title: string
+	footer?: boolean
 }
 
-const { title } = Astro.props
+const { title, footer = true } = Astro.props
 const siteName = 'Сеть кофеен'
 
 import { getLangFromUrl } from '../i18n/utils'
@@ -51,6 +52,6 @@ const lang = getLangFromUrl(Astro.url)
 		<main class='flex-1'>
 			<slot />
 		</main>
-		<AppFooter />
+		{footer && <AppFooter />}
 	</body>
 </html>

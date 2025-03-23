@@ -17,7 +17,8 @@ const items: MainBlockType[] = [
 		type: 'banner',
 		buttonText: 'Открыть',
 		href: translatePath(ROUTES.menu),
-		imageSide: 'left'
+		imageSide: 'left',
+		position: 2
 	},
 	{
 		imageUrl:
@@ -28,13 +29,18 @@ const items: MainBlockType[] = [
 		type: 'banner',
 		buttonText: 'Открыть',
 		href: translatePath(ROUTES.menu),
-		imageSide: 'right'
+		imageSide: 'right',
+		position: 1
 	}
 ]
 ---
 
 <Layout title={t('nav.index')}>
 	<div class='container-max mx-auto flex flex-col gap-4'>
-		{items.map(item => <MainBlock {...item} />)}
+		{
+			items
+				.sort((a, b) => a.position - b.position)
+				.map(item => <MainBlock {...item} />)
+		}
 	</div>
 </Layout>

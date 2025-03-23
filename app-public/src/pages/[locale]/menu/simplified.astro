@@ -1,7 +1,10 @@
 ---
+import { sidebarItems } from '@components/Menu/Vue/types'
 import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
 import Layout from '@layouts/Layout.astro'
+import { products } from '@components/Menu/Vue/types'
+import MenuItem from '@components/Menu/Astro/MenuItem.astro'
 
 const { t, translatePath } = useLocale(Astro.url)
 ---
@@ -18,6 +21,22 @@ const { t, translatePath } = useLocale(Astro.url)
 				href={translatePath(ROUTES.simplifiedMenu)}
 				class='text-sm text-green-700 cursor-pointer'>{t('menu.simplified')}</a
 			>
+		</div>
+		<div class='flex flex-col p-4 gap-5'>
+			{
+				sidebarItems.map(item => (
+					<div class='flex flex-col gap-4'>
+						<h1 class='text-3xl '>{item.title}</h1>
+						<div class='grid grid-cols-1 md:grid-cols-2 gap-7'>
+							{products
+								.filter(curr => curr.category === item.id)
+								.map(product => (
+									<MenuItem item={product} />
+								))}
+						</div>
+					</div>
+				))
+			}
 		</div>
 	</section>
 </Layout>

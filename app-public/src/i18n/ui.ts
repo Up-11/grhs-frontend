@@ -33,7 +33,15 @@ export const ui = {
 		'menu.simplified': 'Simplified menu',
 		'menu.ordinary': 'Ordinary menu',
 		'menu.button.more': 'More',
-		'menu.button.from': 'From'
+		'menu.button.from': 'From',
+		'nutrition.calories': 'Calories',
+		'nutrition.proteins': 'Proteins',
+		'nutrition.fats': 'Fats',
+		'nutrition.carbs': 'Carbs',
+		'modal.price': 'Price',
+		'modal.composition': 'Composition',
+		'modal.EV': 'Energy value',
+		'modal.ml': 'ml'
 	},
 	ru: {
 		'nav.index': 'Главная',
@@ -60,6 +68,14 @@ export const ui = {
 		'menu.simplified': 'Упрощенное меню',
 		'menu.ordinary': 'Обычное меню',
 		'menu.button.more': 'Подробнее',
-		'menu.button.from': 'От'
+		'menu.button.from': 'От',
+		'nutrition.calories': 'Калории',
+		'nutrition.proteins': 'Белки',
+		'nutrition.fats': 'Жиры',
+		'nutrition.carbs': 'Углеводы',
+		'modal.price': 'Цена',
+		'modal.composition': 'Состав',
+		'modal.EV': 'КБЖУ',
+		'modal.ml': 'мл'
 	}
 } as const

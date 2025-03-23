@@ -1,8 +1,13 @@
 ---
 import { useLocale } from '@i18n/useLocale'
 import Layout from '../../layouts/Layout.astro'
+import { GMap } from '@components/Adresses/React/Map'
 
 const { t } = useLocale(Astro.url)
 ---
 
-<Layout title={t('nav.addresses')}>123</Layout>
+<Layout footer={false} title={t('nav.addresses')}>
+	<div class='w-full h-full'>
+		<GMap client:only='react' />
+	</div>
+</Layout>
