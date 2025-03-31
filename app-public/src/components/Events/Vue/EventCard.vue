@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
-import dayjs from 'dayjs'
 import { computed, inject } from 'vue'
 
 import type { IEventCard } from './types'
@@ -10,47 +9,40 @@ const props = defineProps<{ event: IEventCard }>()
 
 const url = inject<URL>('url')
 const { t, translatePath } = useLocale(url!)
-
-const formattedDate = computed(() => dayjs(props.event.date).format('DD/MM'))
 </script>
 
 <template>
-	<div class="max-w-[620px]">
+	<article
+		class="group relative overflow-hidden rounded-xl shadow-lg transition-all hover:shadow-xl"
+	>
+		<div class="aspect-[4/3] overflow-hidden">
+			<img
+				:src="event.imagePreview"
+				:alt="event.name || 'Изображение события'"
+				class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+				loading="lazy"
+			/>
+		</div>
+
 		<div
-			class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border w-80"
+			class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"
 		>
-			<div
-				class="relative overflow-hidden text-gray-700 bg-white bg-clip-border h-70"
-			>
-				<img
-					:src="event.imageUrl"
-					alt="card-image"
-					class="object-cover w-full h-full"
-				/>
-			</div>
-			<div class="p-6">
-				<div class="flex items-center justify-between mb-2">
-					<h2
-						class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
-					>
-						{{ event.name }}
-					</h2>
-					<p class="text-green-700 font-semibold">{{ formattedDate }}</p>
-				</div>
-				<p
-					class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75"
-				>
+			<div class="text-white">
+				<h3 class="text-xl font-bold line-clamp-1">
+					{{ event.name }}
+				</h3>
+
+				<p class="mt-2 text-sm text-gray-200 line-clamp-2">
 					{{ event.description }}
 				</p>
-			</div>
-			<div class="p-6 pt-0">
+
 				<a
 					:href="translatePath(ROUTES.currentEvent(event.id))"
-					class="btn btn-outline border-green-600 text-green-800"
+					class="mt-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium hover:bg-white/20 transition-colors"
 				>
 					{{ t('event.button') }}
 				</a>
 			</div>
 		</div>
-	</div>
+	</article>
 </template>
