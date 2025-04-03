@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLocale } from '@i18n/useLocale'
+import { formatUrl } from '@utils/formatUrl'
 import { ref } from 'vue'
 
 import ProductModal from './ProductModal.vue'
@@ -9,7 +10,7 @@ defineProps<{ item: IProductCard }>()
 
 const url = typeof window !== 'undefined' ? new URL(window.location.href) : null
 
-const { t } = useLocale(url!)
+const { t, lang } = useLocale(url!)
 
 const loading = ref<boolean>(true)
 </script>
@@ -23,18 +24,18 @@ const loading = ref<boolean>(true)
 			></div>
 			<img
 				v-show="!loading"
-				:src="item.imageUrl"
-				:alt="item.name"
+				:src="formatUrl(item.image)"
+				:alt="item.name[lang]"
 				width="250px"
 				height="250px"
-				class="object-cover rounded"
+				class="object-cover h-full rounded"
 				@load="loading = false"
 			/>
 		</div>
 		<div class="flex flex-col gap-1">
-			<h3 class="font-semibold line-clamp-2">{{ item.name }}</h3>
+			<h3 class="font-semibold line-clamp-2">{{ item.name[lang] }}</h3>
 			<h4 class="text-gray-500 line-clamp-3">
-				{{ item.description }}
+				{{ item.description[lang] }}
 			</h4>
 		</div>
 		<div class="flex justify-between mt-2 items-center">

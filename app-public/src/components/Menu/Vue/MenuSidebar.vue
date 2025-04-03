@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import SidebarItem from './SidebarItem.vue'
-import type { IMenu } from './types'
+import type { Category } from './types'
 
-defineProps<{ menuItems: IMenu[]; currentId: string }>()
+defineProps<{ menuItems: Category[]; currentId: string }>()
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLocale } from '@i18n/useLocale'
+import { formatUrl } from '@utils/formatUrl'
 import { computed, onMounted, ref, watch } from 'vue'
 
 import ProductNutrition from './ProductNutrition.vue'
@@ -10,6 +11,8 @@ const props = defineProps<{ item: IProductCard; url: URL }>()
 const modalRef = ref<HTMLDialogElement | null>(null)
 const open = ref<boolean>(false)
 
+const { lang } = useLocale(props.url)
+
 const openModal = () => {
 	modalRef.value?.showModal()
 	open.value = true
@@ -18,7 +21,7 @@ const openModal = () => {
 onMounted(() => {
 	const url = new URL(window.location.href)
 	if (url.searchParams.has('product')) {
-		if (url.searchParams.get('product') === props.item.name) {
+		if (url.searchParams.get('product') === props.item.name.en) {
 			modalRef.value?.showModal()
 			open.value = true
 		}
@@ -106,8 +109,8 @@ const nutritionData = computed(() => {
 						></div>
 						<img
 							v-show="!loading"
-							:src="item.imageUrl"
-							:alt="item.name"
+							:src="formatUrl(item.image)"
+							:alt="item.name[lang]"
 							class="object-cover rounded w-full h-full"
 							@load="loading = false"
 						/>
@@ -137,8 +140,8 @@ const nutritionData = computed(() => {
 					</div>
 				</div>
 				<div class="py-4 flex flex-col gap-4">
-					<h2 class="text-2xl font-bold">{{ item.name }}</h2>
-					<h3 class="text-base text-gray-500">{{ item.description }}</h3>
+					<h2 class="text-2xl font-bold">{{ item.name[lang] }}</h2>
+					<h3 class="text-base text-gray-500">{{ item.description[lang] }}</h3>
 					<div>
 						<h4 class="text-2xl font-bold">{{ t('modal.composition') }}</h4>
 						<p class="text-green-900">{{ composition }}</p>

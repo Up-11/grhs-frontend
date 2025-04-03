@@ -1,17 +1,32 @@
 <script setup lang="ts">
+import { useLocale } from '@i18n/useLocale'
 import { useIntersectionObserver } from '@vueuse/core'
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 
 import MenuCard from './MenuCard.vue'
 import MenuSidebar from './MenuSidebar.vue'
-import { type IMenu, products, sidebarItems } from './types'
+import type { Category, IProductCard } from './types'
 
 const sectionRefs = ref<HTMLElement[]>([])
 const currentId = ref<string>('')
 
+const responseCategories = await fetch(
+	`http://localhost:4200/api/products/categories`
+)
+
+const items = (await responseCategories.json()) as Category[]
+
+const response = await fetch(`http://localhost:4200/api/products`)
+
+const products = (await response.json()) as IProductCard[]
+
+const url = typeof window !== 'undefined' ? new URL(window.location.href) : null
+
+const { t, lang } = useLocale(url!)
+
 onMounted(() => {
 	nextTick(() => {
-		sectionRefs.value = sidebarItems.map(
+		sectionRefs.value = items.map(
 			item => document.getElementById(item.id) as HTMLElement
 		)
 	})
@@ -37,7 +52,7 @@ onUnmounted(() => {
 
 onMounted(() => {
 	nextTick(() => {
-		sectionRefs.value = sidebarItems.map(
+		sectionRefs.value = items.map(
 			item => document.getElementById(item.id) as HTMLElement
 		)
 
@@ -56,19 +71,19 @@ onMounted(() => {
 	<div
 		class="grid max-md:p-4 mb-15 grid-cols-1 md:grid-cols-[200px_1fr] gap-5 mt-4"
 	>
-		<MenuSidebar :current-id="currentId" :menu-items="sidebarItems" />
+		<MenuSidebar :current-id="currentId" :menu-items="items" />
 
 		<div class="flex flex-col gap-25">
-			<div v-for="item in sidebarItems" :key="item.id">
+			<div v-for="item in items" :key="item.id">
 				<h2 ref="target" class="text-4xl font-bold" :id="item.id">
-					{{ item.title }}
+					{{ item.title[lang] }}
 				</h2>
 
 				<div
 					class="grid grid-cols-1 max-md:justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
 				>
 					<MenuCard
-						v-for="product in products.filter(p => p.category === item.id)"
+						v-for="product in products.filter(p => p.categoryId === item.id)"
 						:key="product.id"
 						:item="product"
 					/>

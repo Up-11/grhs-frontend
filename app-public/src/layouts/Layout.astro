@@ -15,6 +15,7 @@ import { getLangFromUrl } from '../i18n/utils'
 import AppHeader from '../components/Header/AppHeader.astro'
 import { ClientRouter } from 'astro:transitions'
 import AppFooter from '@components/Footer/AppFooter.astro'
+import type { TextWithLangs } from 'src/types/types'
 
 const lang = getLangFromUrl(Astro.url)
 ---

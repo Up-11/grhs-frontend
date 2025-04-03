@@ -4,8 +4,14 @@ import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
 import CoffeeLoading from '@icons/CoffeeLoading.astro'
 import Layout from '@layouts/Layout.astro'
+import type { TextWithLangs } from 'src/types/types'
 
 const { t, translatePath } = useLocale(Astro.url)
+
+interface Category {
+	hrefId: string
+	title: TextWithLangs
+}
 ---
 
 <Layout title={t('nav.menu')}>

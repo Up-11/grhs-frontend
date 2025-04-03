@@ -6,7 +6,7 @@ import { computed, provide, ref } from 'vue'
 import CalendarDay from './CalendarDay.vue'
 import { useDates } from './composables/useDates'
 import EventList from './EventList.vue'
-import { events } from './types'
+import type { IEventCard } from './types'
 import { getMonthTranslation } from './utils'
 
 interface ITab {
@@ -14,12 +14,19 @@ interface ITab {
 	value: string
 }
 
+const responseEvents = await fetch(`http://localhost:4200/api/events`)
+
+const events = (await responseEvents.json()) as IEventCard[]
+const firstEvent = computed(() =>
+	events.sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
+)
+
 const url = typeof window !== 'undefined' ? new URL(window.location.href) : null
 
 const { t } = useLocale(url!)
 
-const firstEventDate = '2025-02-12'
-const lastEventDate = '2025-05-12'
+const firstEventDate = firstEvent.value[0].date
+const lastEventDate = firstEvent.value.at(-1)!.date
 
 const {
 	currentEventDate,
@@ -29,7 +36,7 @@ const {
 	startDate,
 	lastDateInput,
 	clearCurrentEventDate
-} = useDates()
+} = useDates(events, lastEventDate)
 
 const tabs: ITab[] = [
 	{
@@ -73,7 +80,7 @@ const setCurrentTab = (tab: ITab) => {
 const filteredEvents = (month: string) => {
 	return events
 		.filter(curr => {
-			const currDate = new Date(curr.date)
+			const currDate = new Date(curr.date.split('T')[0])
 			const currMonth = formatMonth(currDate)
 
 			if (currMonth === month) {
@@ -94,7 +101,7 @@ const dayEvents = computed(() => {
 
 	return events
 		.filter(curr => {
-			const currDate = new Date(curr.date)
+			const currDate = new Date(curr.date.split('T')[0])
 			const selectedDate = new Date(currentEventDate.value!)
 
 			return (
@@ -174,7 +181,7 @@ provide('url', url)
 		<EventList
 			v-else-if="currentEventDate"
 			v-for="event in dayEvents"
-			:month="dayjs(event.date).format('DD/MM')"
+			:month="dayjs(event.date.split('T')[0]).format('DD/MM')"
 			:key="event.id"
 			:events="dayEvents"
 		/>

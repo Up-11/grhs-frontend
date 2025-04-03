@@ -1,74 +1,38 @@
 ---
+import { useLocale } from '@i18n/useLocale'
 import { cn } from '@utils/css'
+import { formatUrl } from '@utils/formatUrl'
 import { Image } from 'astro:assets'
 import type { MainBlockType } from 'src/types/types'
 
 interface Props extends MainBlockType {}
+
+const { lang } = useLocale(Astro.url)
 ---
 
-{
-	Astro.props.type === 'banner' && (
-		<div class='flex max-sm:gap-5 max-sm:flex-col max-sm:items-center w-full max-sm:pb-5  sm:h-120 bg-emerald-900 '>
-			<div
-				class={cn(
-					'max-h-120 sm:w-1/2',
-					Astro.props.imageSide === 'right' && 'order-2'
-				)}
-			>
-				<Image
-					src={Astro.props.imageUrl}
-					alt={Astro.props.title}
-					width='300'
-					height='300'
-					class='object-cover h-full w-full'
-				/>
-			</div>
-			<div
-				class={cn(
-					'flex w-1/2 flex-col justify-center text-center items-center text-white gap-4 p-2'
-				)}
-			>
-				<h1 class='text-3xl font-semibold'>{Astro.props.title}</h1>
-				<h2 class='text-2xl font-semibold'>{Astro.props.description}</h2>
-				<a href={Astro.props.href}>
-					<button class='btn btn-outline btn-success font-semibold'>
-						{Astro.props.buttonText}
-					</button>
-				</a>
-			</div>
-		</div>
-	)
-}
-{
-	Astro.props.type === 'ads' && (
-		<div class='flex max-sm:gap-5 max-sm:flex-col max-sm:items-center w-full max-sm:pb-5  sm:h-120 bg-emerald-900 '>
-			<div
-				class={cn(
-					'max-h-120 sm:w-1/2',
-					Astro.props.imageSide === 'right' && 'order-2'
-				)}
-			>
-				<Image
-					src={Astro.props.imageUrl}
-					alt={Astro.props.title}
-					width='300'
-					height='300'
-					class='object-cover h-full w-full'
-				/>
-			</div>
-			<div
-				class={cn(
-					'flex w-1/2 flex-col justify-center text-center items-center text-white gap-4 '
-				)}
-			>
-				<h1 class='text-3xl font-semibold'>{Astro.props.title}</h1>
-				<h2 class='text-2xl font-semibold'>{Astro.props.description}</h2>
-				<a href={Astro.props.href}>
-					<button class='btn btn-outline btn-success font-semibold'>
-						{Astro.props.buttonText}
-					</button>
-				</a>
-			</div>
-		</div>
-	)
-}
+<div
+	class='flex max-sm:gap-5 max-sm:flex-col max-sm:items-center w-full max-sm:pb-5 sm:h-120 bg-emerald-900'
+>
+	<div
+		class={cn(
+			'max-h-120 sm:w-1/2',
+			Astro.props.imageSide === 'right' && 'order-2'
+		)}
+	>
+		<Image
+			src={formatUrl(Astro.props.image)}
+			alt={Astro.props.title[lang]}
+			width='300'
+			height='300'
+			class='object-cover h-full w-full'
+		/>
+	</div>
+	<div
+		class={cn(
+			'flex w-1/2 flex-col justify-center text-center items-center text-white gap-4 p-2'
+		)}
+	>
+		<h1 class='text-3xl font-semibold'>{Astro.props.title[lang]}</h1>
+		<h2 class='text-2xl font-semibold'>{Astro.props.description[lang]}</h2>
+	</div>
+</div>

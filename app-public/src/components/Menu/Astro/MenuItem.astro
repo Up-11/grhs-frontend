@@ -7,10 +7,12 @@ interface Props {
 }
 
 const {
-	item: { name, category, composition, nutrition, price, volumes }
+	item: { name, categoryId, composition, nutrition, price, volumes }
 } = Astro.props
 
-const { t } = useLocale(Astro.url)
+console.log(Astro.props)
+
+const { t, lang } = useLocale(Astro.url)
 
 const joinedComposition = composition.join(' / ')
 const joinedVolumes = Object.entries(volumes)
@@ -28,7 +30,7 @@ const joinedPrice = `${price.value} - ${price.max}`
 ---
 
 <div>
-	<h2 class='border-b border-gray-300 text-xl'>{name}</h2>
+	<h2 class='border-b border-gray-300 text-xl'>{name[lang]}</h2>
 	<span class='text-gray-400 text-sm tracking-wide'>
 		{joinedComposition},
 	</span>

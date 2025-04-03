@@ -7,6 +7,7 @@ export const useLocale = (url: URL) => {
 
 	return {
 		t,
-		translatePath
+		translatePath,
+		lang
 	}
 }

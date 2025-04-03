@@ -1,9 +1,9 @@
 import { computed, ref } from 'vue'
 
-import { events } from '../types'
+import type { IEventCard } from '../types'
 import { getMonthTranslation } from '../utils'
 
-export const useDates = () => {
+export const useDates = (events: IEventCard[], lastDate: string) => {
 	const months = [
 		'January',
 		'February',
@@ -43,7 +43,8 @@ export const useDates = () => {
 	)
 
 	const days = computed(() => {
-		const eventDates = new Set(events.map(event => event.date))
+		const eventDates = new Set(events.map(event => event.date.split('T')[0]))
+
 		const result: Date[] = []
 
 		const lastDate = new Date(lastDateInput.value)

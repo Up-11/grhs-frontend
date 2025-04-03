@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import type { IMenu } from './types'
+import { useLocale } from '@i18n/useLocale'
 
-defineProps<{ item: IMenu; isActive?: boolean }>()
+import type { Category } from './types'
+
+defineProps<{ item: Category; isActive?: boolean }>()
+
+const url = typeof window !== 'undefined' ? new URL(window.location.href) : null
+
+const { lang } = useLocale(url!)
 </script>
 
 <template>
@@ -11,9 +17,9 @@ defineProps<{ item: IMenu; isActive?: boolean }>()
 			isActive && 'bg-green-50 text-green-900'
 		]"
 		:key="item.id"
-		:href="'#' + item.id"
+		:href="item.hrefId"
 	>
-		{{ item.title }}</a
+		{{ item.title[lang] }}</a
 	>
 </template>
 
