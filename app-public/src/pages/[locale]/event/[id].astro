@@ -1,16 +1,21 @@
 ---
-import { events } from '@components/Events/Vue/types'
+import type { IEventCard } from '@components/Events/Vue/types'
 import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
 import Layout from '@layouts/Layout.astro'
+import { formatUrl } from '@utils/formatUrl'
 
 const { id } = Astro.params
-const { t, translatePath } = useLocale(Astro.url)
+const { t, translatePath, lang } = useLocale(Astro.url)
 
-const currentEvent = events.find(event => event.id === id)
+const response = await fetch(
+	`${import.meta.env.API_URL}/events/get-by-id/${id}`
+)
+
+const currentEvent = (await response.json()) as IEventCard
 ---
 
-<Layout title={currentEvent?.name || '404'}>
+<Layout title={currentEvent?.name[lang] || '404'}>
 	<div class=''>
 		<div class='container mx-auto'>
 			<div class='breadcrumbs text-sm'>
@@ -18,7 +23,7 @@ const currentEvent = events.find(event => event.id === id)
 					<li>
 						<a href={translatePath(ROUTES.events)}>{t('nav.events')}</a>
 					</li>
-					<li>{currentEvent?.name}</li>
+					<li>{currentEvent?.name[lang]}</li>
 				</ul>
 			</div>
 		</div>
@@ -27,7 +32,7 @@ const currentEvent = events.find(event => event.id === id)
 			class='w-full h-[550px] px-2 flex items-center justify-center overflow-hidden'
 		>
 			<img
-				src={currentEvent?.imagePreview}
+				src={formatUrl(currentEvent?.image)}
 				alt='Event preview'
 				class='w-full h-full object-cover rounded-lg'
 			/>
@@ -35,12 +40,12 @@ const currentEvent = events.find(event => event.id === id)
 		<div
 			class='container mx-auto flex flex-col justify-center items-center mt-10'
 		>
-			<h1 class='text-3xl font-semibold'>{currentEvent?.name}</h1>
+			<h1 class='text-3xl font-semibold'>{currentEvent?.name[lang]}</h1>
 
 			<div class='mt-4 flex flex-col max-w-200 gap-2'>
 				{
 					Object.values(currentEvent?.content || {}).map(curr => (
-						<p class='text-xl font-medium text-center'>{curr}</p>
+						<p class='text-xl font-medium text-center'>{curr[lang]}</p>
 					))
 				}
 			</div>

@@ -6,5 +6,5 @@ export interface IEventCard {
 	date: string
 	description: TextWithLangs
 	image: string
-	content: Record<string, string>
+	content: Record<string, TextWithLangs>
 }
