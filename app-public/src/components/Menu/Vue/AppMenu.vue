@@ -11,12 +11,12 @@ const sectionRefs = ref<HTMLElement[]>([])
 const currentId = ref<string>('')
 
 const responseCategories = await fetch(
-	`http://localhost:4200/api/products/categories`
+	`http://api.up-mailer.ru/api/products/categories`
 )
 
 const items = (await responseCategories.json()) as Category[]
 
-const response = await fetch(`http://localhost:4200/api/products`)
+const response = await fetch(`http://api.up-mailer.ru/api/products`)
 
 const products = (await response.json()) as IProductCard[]
 

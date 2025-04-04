@@ -14,7 +14,7 @@ interface ITab {
 	value: string
 }
 
-const responseEvents = await fetch(`http://localhost:4200/api/events`)
+const responseEvents = await fetch(`http://up.mailer.ru/api/events`)
 
 const events = (await responseEvents.json()) as IEventCard[]
 const firstEvent = computed(() =>
