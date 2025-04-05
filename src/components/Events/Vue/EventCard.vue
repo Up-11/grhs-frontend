@@ -28,7 +28,7 @@ const { t, translatePath, lang } = useLocale(url!)
 		<p
 			class="mt-4 font-bold absolute bottom-2 right-2 text-sm text-gray-100 z-20"
 		>
-			Дата: {{ new Date(event.date).toLocaleDateString() }}
+			{{ new Date(event.date).toLocaleDateString() }}
 		</p>
 
 		<div
