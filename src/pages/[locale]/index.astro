@@ -5,16 +5,16 @@ import '../../styles/global.css'
 import { useLocale } from '@i18n/useLocale'
 import { ROUTES } from '@config/routes'
 import type { MainBlockType } from 'src/types/types'
+import axios from 'axios'
 
 const { translatePath, t } = useLocale(Astro.url)
 
 const apiUrl = import.meta.env.API_URL
 
-const response = await fetch(`${apiUrl}/banner/get-all`)
+const response = await axios.get(`${apiUrl}/banner/get-all`)
 
-const items: MainBlockType[] = await response.json()
+const items: MainBlockType[] = await response.data
 
-console.log(items)
 ---
 
 <Layout title={t('nav.index')}>

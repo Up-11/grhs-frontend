@@ -6,19 +6,20 @@ import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import MenuCard from './MenuCard.vue'
 import MenuSidebar from './MenuSidebar.vue'
 import type { Category, IProductCard } from './types'
+import axios from 'axios'
 
 const sectionRefs = ref<HTMLElement[]>([])
 const currentId = ref<string>('')
 
-const responseCategories = await fetch(
+const responseCategories = await axios.get(
 	`http://api.up-mailer.ru/api/products/categories`
 )
 
-const items = (await responseCategories.json()) as Category[]
+const items = (await responseCategories.data) as Category[]
 
-const response = await fetch(`http://api.up-mailer.ru/api/products`)
+const response = await axios.get(`http://api.up-mailer.ru/api/products`)
 
-const products = (await response.json()) as IProductCard[]
+const products = (await response.data) as IProductCard[]
 
 const url = typeof window !== 'undefined' ? new URL(window.location.href) : null
 

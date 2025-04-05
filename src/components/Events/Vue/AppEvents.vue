@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useLocale } from '@i18n/useLocale'
 import dayjs from 'dayjs'
-import { computed, provide, ref } from 'vue'
+import { computed, onMounted, provide, ref, watch } from 'vue'
 
 import CalendarDay from './CalendarDay.vue'
 import { useDates } from './composables/useDates'
@@ -9,14 +9,17 @@ import EventList from './EventList.vue'
 import type { IEventCard } from './types'
 import { getMonthTranslation } from './utils'
 
+import axios from 'axios'
+
 interface ITab {
 	title: string
 	value: string
 }
 
-const responseEvents = await fetch(`http://up.mailer.ru/api/events`)
+const responseEvents = await axios.get(`http://api.up-mailer.ru/api/events`)
 
-const events = (await responseEvents.json()) as IEventCard[]
+const events = (await responseEvents.data) as IEventCard[]
+
 const firstEvent = computed(() =>
 	events.sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1))
 )
@@ -27,6 +30,7 @@ const { t } = useLocale(url!)
 
 const firstEventDate = firstEvent.value[0].date
 const lastEventDate = firstEvent.value.at(-1)!.date
+console.log(firstEventDate, lastEventDate)
 
 const {
 	currentEventDate,
@@ -35,18 +39,18 @@ const {
 	filteredMonths,
 	startDate,
 	lastDateInput,
-	clearCurrentEventDate
-} = useDates(events, lastEventDate)
+	clearCurrentEventDate,
+} = useDates(events)
 
 const tabs: ITab[] = [
 	{
 		title: t('event.closest-title'),
-		value: 'closest'
+		value: 'closest',
 	},
 	{
 		title: t('event.past-title'),
-		value: 'past'
-	}
+		value: 'past',
+	},
 ]
 const currentTab = ref<ITab>(tabs[0])
 const onWheel = (event: WheelEvent) => {
@@ -63,6 +67,10 @@ const setCurrentTab = (tab: ITab) => {
 	currentTab.value = tab
 	clearCurrentEventDate()
 
+	checkDate()
+}
+
+const checkDate = () => {
 	if (currentTab.value.value === 'closest') {
 		const today = new Date()
 		today.setHours(0, 0, 0, 0)
@@ -76,6 +84,9 @@ const setCurrentTab = (tab: ITab) => {
 		startDate.value = new Date(firstEventDate)
 	}
 }
+onMounted(() => checkDate())
+
+console.log(startDate.value, lastDateInput.value)
 
 const filteredEvents = (month: string) => {
 	return events
@@ -139,7 +150,7 @@ provide('url', url)
 								'font-bold cursor-pointer select-none',
 								tab.value === currentTab.value
 									? 'text-green-300 sm:text-4xl text-xl order-1'
-									: 'sm:text-2xl order-2 text-lg'
+									: 'sm:text-2xl order-2 text-lg',
 							]"
 						>
 							{{ tab.title }}

@@ -4,17 +4,21 @@ import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
 import Layout from '@layouts/Layout.astro'
 import MenuItem from '@components/Menu/Astro/MenuItem.astro'
+import axios from 'axios'
 
 const { t, translatePath, lang } = useLocale(Astro.url)
 
-const responseCategories = await fetch(
-	`${import.meta.env.API_URL}/products/categories`
+const responseCategories = await axios.get(
+	`http://api.up-mailer.ru/api/products/categories`
 )
 
-const items = (await responseCategories.json()) as Category[]
-const response = await fetch(`${import.meta.env.API_URL}/products`)
+const items = (await responseCategories.data) as Category[]
 
-const products = (await response.json()) as IProductCard[]
+
+const response = await axios.get(`http://api.up-mailer.ru/api/products`)
+
+const products = (await response.data) as IProductCard[]
+
 ---
 
 <Layout title={t('nav.menu')}>

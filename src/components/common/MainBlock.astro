@@ -19,7 +19,7 @@ const { lang } = useLocale(Astro.url)
 			Astro.props.imageSide === 'right' && 'order-2'
 		)}
 	>
-		<Image
+		<img
 			src={formatUrl(Astro.props.image)}
 			alt={Astro.props.title[lang]}
 			width='300'

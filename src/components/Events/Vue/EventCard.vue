@@ -25,21 +25,27 @@ const { t, translatePath, lang } = useLocale(url!)
 			/>
 		</div>
 
-		<div
-			class="absolute gap-4 inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"
+		<p
+			class="mt-4 font-bold absolute bottom-2 right-2 text-sm text-gray-100 z-20"
 		>
-			<div class="text-white">
+			Дата: {{ new Date(event.date).toLocaleDateString() }}
+		</p>
+
+		<div
+			class="absolute gap-5 inset-0 bg-gradient-to-t from-black/70 to-transparent p-4 flex flex-col justify-end"
+		>
+			<div class="text-white flex flex-col gap-2 justify-start">
 				<h3 class="text-xl font-bold line-clamp-1">
 					{{ event.name[lang] }}
 				</h3>
 
-				<p class="mt-2 text-sm text-gray-200 line-clamp-2">
+				<p class="text-sm text-gray-200 line-clamp-2">
 					{{ event.description[lang] }}
 				</p>
 
 				<a
 					:href="translatePath(ROUTES.currentEvent(event.id))"
-					class="mt-5 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium hover:bg-white/20 transition-colors"
+					class="self-start px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium hover:bg-white/20 transition-colors"
 				>
 					{{ t('event.button') }}
 				</a>

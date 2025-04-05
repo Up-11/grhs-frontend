@@ -4,15 +4,16 @@ import { ROUTES } from '@config/routes'
 import { useLocale } from '@i18n/useLocale'
 import Layout from '@layouts/Layout.astro'
 import { formatUrl } from '@utils/formatUrl'
+import axios from 'axios'
 
 const { id } = Astro.params
 const { t, translatePath, lang } = useLocale(Astro.url)
 
-const response = await fetch(
+const response = await axios.get(
 	`${import.meta.env.API_URL}/events/get-by-id/${id}`
 )
 
-const currentEvent = (await response.json()) as IEventCard
+const currentEvent = (await response.data) as IEventCard
 ---
 
 <Layout title={currentEvent?.name[lang] || '404'}>
