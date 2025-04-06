@@ -54,19 +54,22 @@ const cards:IMainCard[] = [{
 }
 ]
 
+const sortedItems = items.sort((a, b) => a.position - b.position)
+
 ---
 
 <Layout title={t('nav.index')}>
 	<div class='container-max mx-auto flex flex-col gap-4'>
-		{
-			items
-				.sort((a, b) => a.position - b.position)
-				.map(item => <MainBlock {...item} />)
-		}
+			<MainBlock {...sortedItems[0]} />
 	</div>
-	<div class="mt-4 flex flex-wrap justify-center gap-2 justify-items-center container-max mx-auto">
+	<div class="my-4 flex flex-wrap justify-center gap-2 justify-items-center container-max mx-auto">
 		{
 			cards.map(card => <MainCard {...card} />)
+		}
+	</div>
+	<div class='container-max mx-auto flex flex-col gap-4'>
+		{
+		sortedItems.slice(1).map(item => <MainBlock {...item} />)
 		}
 	</div>
 </Layout>
