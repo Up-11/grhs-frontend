@@ -1,0 +1,19 @@
+---
+import { useLocale } from '@i18n/useLocale'
+import type { IMainCard, TextWithLangs } from 'src/types/types'
+
+interface Props extends IMainCard {}
+
+const {title, description, link, image} = Astro.props
+
+const {lang, t} = useLocale(Astro.url)
+---
+
+<div class="max-w-100">
+  <img src={image} alt={title[lang]} />
+  <div class="flex flex-col gap-1">
+  <h2 class="text-xl font-medium">{title[lang]}</h2>
+  <p class="text-lg">{description[lang]}</p>
+  <a class="btn btn-outline self-start border-green-600 text-green-800 hover:bg-green-50 transition-colors" href={link}>{t('event.button')}</a>
+  </div>
+</div>

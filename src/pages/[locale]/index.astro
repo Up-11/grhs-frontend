@@ -4,8 +4,9 @@ import Layout from '../../layouts/Layout.astro'
 import '../../styles/global.css'
 import { useLocale } from '@i18n/useLocale'
 import { ROUTES } from '@config/routes'
-import type { MainBlockType } from 'src/types/types'
+import type { IMainCard, MainBlockType } from 'src/types/types'
 import axios from 'axios'
+import MainCard from '@components/common/MainCard.astro'
 
 const { translatePath, t } = useLocale(Astro.url)
 
@@ -15,6 +16,44 @@ const response = await axios.get(`${apiUrl}/banner/get-all`)
 
 const items: MainBlockType[] = await response.data
 
+const cards:IMainCard[] = [{
+	title: {
+		ru: 'Меню',
+		en: 'Menu'
+	},
+	description: {
+		ru: 'Больше о нагих блюдах и напитках',
+		en: 'More about our dishes and drinks'
+	},
+	link: translatePath(ROUTES.menu),
+	image: 'https://static.tildacdn.com/tild6161-3930-4163-b863-333338653433/MVO_1175.jpg'
+},
+{
+	title: {
+		ru: 'Открытие кофейни',
+		en: 'Open coffee shops'
+	},
+	description: {
+		ru: 'Адреса наших кофеен',
+		en: 'Addresses of our coffee shops'
+	},
+	link: translatePath(ROUTES.addresses),
+		image: 'https://static.tildacdn.com/tild6432-3461-4533-b364-353361303438/MVO_1175-.jpg'
+},
+{
+	title: {
+		ru: 'События',
+		en: 'Events'
+	},
+	description: {
+		ru: 'Узнавайте о жизни наших кофеен',
+		en: 'Discover the life of our coffee shops'
+	},
+	link: translatePath(ROUTES.events),
+	image: 'https://avatars.mds.yandex.net/get-altay/11004775/2a0000018ca9db568b2431723ee320116fe2/orig'
+}
+]
+
 ---
 
 <Layout title={t('nav.index')}>
@@ -23,6 +62,11 @@ const items: MainBlockType[] = await response.data
 			items
 				.sort((a, b) => a.position - b.position)
 				.map(item => <MainBlock {...item} />)
+		}
+	</div>
+	<div class="mt-4 flex flex-wrap justify-center gap-2 justify-items-center container-max mx-auto">
+		{
+			cards.map(card => <MainCard {...card} />)
 		}
 	</div>
 </Layout>

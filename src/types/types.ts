@@ -6,6 +6,13 @@ export interface MainBlockType {
 	position: number
 }
 
+export interface IMainCard {
+	title: TextWithLangs
+	description: TextWithLangs
+	link: string
+	image: string
+}
+
 export type ImageSide = 'left' | 'right'
 
 export type EventContent = Record<string, TextWithLangs>
@@ -47,5 +54,5 @@ export enum NUTRITION {
 	CALORIES = 'nutrition.calories',
 	PROTEINS = 'nutrition.proteins',
 	FATS = 'nutrition.fats',
-	CARBS = 'nutrition.carbs'
+	CARBS = 'nutrition.carbs',
 }
