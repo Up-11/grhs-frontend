@@ -72,7 +72,7 @@ onMounted(() => {
 	<div
 		class="grid max-md:p-4 mb-15 grid-cols-1 md:grid-cols-[200px_1fr] gap-5 mt-4"
 	>
-		<MenuSidebar :current-id="currentId" :menu-items="items" />
+		<MenuSidebar :current-id="currentId" :menu-items="items" :url="url!" />
 
 		<div class="flex flex-col gap-25">
 			<div v-for="item in items" :key="item.id">

@@ -8,24 +8,20 @@ const { t } = useLocale(Astro.url)
 
 const items = [
 	{
-		content:
-			'Мы сфокусировались на вкусном и высококачественном кофе. Тщательный отбор позволяет выбрать только лучшие кофейные зерна и обжарить их так, чтобы раскрыть самые изысканные нотки вкуса и передать их каждой чашке.'
+		content: t('about.philosophy1')
+			
 	},
 	{
-		content:
-			'Мы готовим наш кофе с особым отношением к каждому гостю и помогаем найти нужные инструменты и технологии для того, чтобы вы смогли приготовить лучший кофе где угодно, особенно у себя дома.'
+		content: t('about.philosophy2')
 	},
 	{
-		content:
-			'Да, мы одержимы качеством кофе. Для этого мы используем только свежий урожай зерна из разных уголков Мира, каждый из которых оставляет свою неповторимую историю во вкусе.'
+		content: t('about.philosophy3')
 	},
 	{
-		content:
-			'Наша команда живет кофе и идеей развития кофейной культуры. Мы многому учимся сами и готовы разделить знания с нашими гостями. Мы работаем на лучшем оборудовании и используем передовые инструменты и технологии.'
+		content: t('about.philosophy4')
 	},
 	{
-		content:
-			'Green House — это кофейня с особым отношением к своим гостям. Мы по-настоящему рады каждому и хотим каждого сделать чуточку счастливее. Вы не можете купить счастье, но вы можете купить кофе. Это так просто, чтобы стать счастливее.'
+		content: t('about.philosophy5')
 	}
 ]
 ---
@@ -43,16 +39,13 @@ const items = [
 	<section
 		class='flex flex-col justify-center items-center text-center max-w-200 mx-auto'
 	>
-		<h2 class='text-3xl font-semibold mt-2'>Меняем кофейные привычки</h2>
+		<h2 class='text-3xl font-semibold mt-2'>{t('about.title1')}</h2>
 		<h3 class='mt-2 text-lg font-medium'>
-			Green House — сеть кофеен с живой и позитивной атмосферой. Сейчас сеть
-			объединяет 125 кофеен. Green House не просто кофейня, это философия,
-			которой мы делимся с каждым гостем.
-		</h3>
+			{t('about.heading')}		</h3>
 	</section>
 
 	<section class='container mx-auto'>
-		<h2 class='text-3xl font-semibold mt-2'>Наша философия</h2>
+		<h2 class='text-3xl font-semibold mt-2'>{t('about.title2')}</h2>
 		<div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
 			{
 				items.map((item, index) => (
@@ -63,53 +56,53 @@ const items = [
 	</section>
 
 	<div class='text-center max-w-md mx-auto mt-5'>
-		<h2 class='text-2xl font-bold mb-6'>Напишите нам:</h2>
+		<h2 class='text-2xl font-bold mb-6'>{t('about.title3')}</h2>
 
 		<div class='space-y-6 text-lg'>
 			<p>
-				для отзывов: <a
+				{t('contact.reviews')} <a
 					href='mailto:quality.control@grnhs.ru'
 					class='text-green-600 underline'>quality.control@grnhs.ru</a
 				>
 			</p>
 
 			<p>
-				по франшизе: <a
+				{t('contact.franchise')} <a
 					href='mailto:franch@grnhs.ru'
 					class='text-green-600 underline'>franch@grnhs.ru</a
 				>
 			</p>
 
 			<p>
-				для поставщиков кондитерской и пр. продукции:<br />
+				{t('contact.suppliers')}<br />
 				<a href='mailto:products@grnhs.ru' class='text-green-600 underline'
 					>products@grnhs.ru</a
 				>
 			</p>
 
 			<p>
-				по вопросам рекламы и продвижения:<br />
+				{t('contact.advertising')}:<br />
 				<a href='mailto:reklama@grnhs.ru' class='text-green-600 underline'
 					>reklama@grnhs.ru</a
 				>
 			</p>
 
 			<p>
-				по вопросам оптовых закупок: <a
+				{t('contact.wholesale')} <a
 					href='mailto:opt@grnhs.ru'
 					class='text-green-600 underline'>opt@grnhs.ru</a
 				>
 			</p>
 
 			<p>
-				по вопросам работы: <a
+				{t('contact.employment')} <a
 					href='mailto:hr@grnhs.ru'
 					class='text-green-600 underline'>hr@grnhs.ru</a
 				>
 			</p>
 
 			<p>
-				по общим вопросам: <a
+				{t('contact.general')} <a
 					href='mailto:hello@grnhs.ru'
 					class='text-green-600 underline'>hello@grnhs.ru</a
 				>

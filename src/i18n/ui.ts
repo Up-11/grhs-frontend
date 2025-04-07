@@ -1,6 +1,6 @@
 export const languages = {
 	ru: 'RU',
-	en: 'EN'
+	en: 'EN',
 }
 
 export const defaultLang = 'ru'
@@ -41,9 +41,34 @@ export const ui = {
 		'modal.price': 'Price',
 		'modal.composition': 'Composition',
 		'modal.EV': 'Energy value',
-		'modal.ml': 'ml'
+		'modal.ml': 'ml',
+		'about.heading':
+			'Green House — a network of coffee houses with a lively and positive atmosphere. The network currently includes 125 coffee houses. Green House is not just a coffee house; it is a philosophy that we share with every guest.',
+		'about.philosophy1':
+			'We have focused on delicious and high-quality coffee. Careful selection allows us to choose only the best coffee beans and roast them to reveal the most exquisite taste notes and pass them on to every cup.',
+		'about.philosophy2':
+			'We prepare our coffee with special attention to each guest and help find the right tools and technologies so that you can make the best coffee anywhere, especially at home.',
+		'about.philosophy3':
+			'Yes, we are obsessed with coffee quality. To do this, we use only the freshest harvest of beans from different corners of the world, each of which leaves its unique story in the taste.',
+		'about.philosophy4':
+			'Our team lives with coffee and the idea of developing coffee culture. We learn a lot ourselves and are ready to share knowledge with our guests. We work on the best equipment and use advanced tools and technologies.',
+		'about.philosophy5':
+			'Green House is a coffee house with a special attitude towards its guests. We are truly delighted with each and every one and want to make everyone a little happier. You can’t buy happiness, but you can buy coffee. It’s so simple to become happier.',
+		'contact.reviews': 'For reviews: ',
+		'contact.franchise': 'For franchise: ',
+		'contact.suppliers': 'For suppliers of confectionery and other products: ',
+		'contact.advertising': 'For advertising and promotion questions: ',
+		'contact.wholesale': 'For wholesale purchases: ',
+		'contact.employment': 'For employment questions: ',
+		'contact.general': 'For general questions:',
+		'menu.category': 'Categories',
+		'about.title1': 'Changing our coffee habits',
+		'about.title2': 'Out Philosophy',
+		'about.title3': 'Contact us',
 	},
 	ru: {
+		'menu.category': 'Категории',
+
 		'nav.index': 'Главная',
 		'nav.menu': 'Меню',
 		'nav.addresses': 'Адреса',
@@ -76,6 +101,28 @@ export const ui = {
 		'modal.price': 'Цена',
 		'modal.composition': 'Состав',
 		'modal.EV': 'КБЖУ',
-		'modal.ml': 'мл'
-	}
+		'about.heading':
+			'Green House — сеть кофеен с живой и позитивной атмосферой. Сейчас сеть объединяет 125 кофеен. Green House не просто кофейня, это философия, которой мы делимся с каждым гостем.',
+		'about.philosophy1':
+			'Мы сфокусировались на вкусном и высококачественном кофе. Тщательный отбор позволяет выбрать только лучшие кофейные зерна и обжарить их так, чтобы раскрыть самые изысканные нотки вкуса и передать их каждой чашке.',
+		'about.philosophy2':
+			'Мы готовим наш кофе с особым отношением к каждому гостю и помогаем найти нужные инструменты и технологии для того, чтобы вы смогли приготовить лучший кофе где угодно, особенно у себя дома.',
+		'about.philosophy3':
+			'Да, мы одержимы качеством кофе. Для этого мы используем только свежий урожай зерна из разных уголков Мира, каждый из которых оставляет свою неповторимую историю во вкусе.',
+		'about.philosophy4':
+			'Наша команда живет кофе и идеей развития кофейной культуры. Мы многому учимся сами и готовы разделить знания с нашими гостями. Мы работаем на лучшем оборудовании и используем передовые инструменты и технологии.',
+		'about.philosophy5':
+			'Green House — это кофейня с особым отношением к своим гостям. Мы по-настоящему рады каждому и хотим каждого сделать чуточку счастливее. Вы не можете купить счастье, но вы можете купить кофе. Это так просто, чтобы стать счастливее.',
+		'contact.reviews': 'для отзывов: ',
+		'contact.franchise': 'по франшизе:',
+		'contact.suppliers': 'для поставщиков кондитерской и пр. продукции: ',
+		'contact.advertising': 'по вопросам рекламы и продвижения: ',
+		'contact.wholesale': 'по вопросам оптовых закупок: ',
+		'contact.employment': 'по вопросам работы:',
+		'contact.general': 'по общим вопросам:',
+		'modal.ml': 'мл',
+		'about.title1': 'Меняем кофейные привычки',
+		'about.title2': 'Наша философия',
+		'about.title3': 'Напишите нам',
+	},
 } as const
