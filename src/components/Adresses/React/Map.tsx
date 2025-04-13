@@ -54,7 +54,7 @@ export const GMap = () => {
 			promises.push(
 				axios
 					.get(
-						`https://catalog.api.2gis.com/3.0/items?q=Green%20House&location=${center[0]}%2C${center[1]}&key=b5ad917c-78ca-4c9d-9265-44d22d87ffa7&page_size=10&fields=items.point,items.external_content,items.full_address_name,items.org&radius=1000&page=${page}`
+						`https://catalog.api.2gis.com/3.0/items?q=Green%20House&location=${center[0]}%2C${center[1]}&key=72e15679-8136-4fdb-b72a-1976b9ece78e&page_size=10&fields=items.point,items.external_content,items.full_address_name,items.org&radius=1000&page=${page}`
 					)
 					.then(response => {
 						if (response.status !== 200) {
