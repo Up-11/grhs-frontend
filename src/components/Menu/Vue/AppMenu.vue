@@ -76,7 +76,7 @@ onMounted(() => {
 
 		<div class="flex flex-col gap-25">
 			<div v-for="item in items" :key="item.id">
-				<h2 ref="target" class="text-4xl font-bold" :id="item.id">
+				<h2 ref="target" class="text-4xl font-bold" :id="item.hrefId">
 					{{ item.title[lang] }}
 				</h2>
 
