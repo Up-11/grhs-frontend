@@ -56,8 +56,6 @@ const closeModalOnButton = () => {
 
 const loading = ref<boolean>(true)
 
-const composition = computed(() => props.item.composition.join('/'))
-
 const { t } = useLocale(props.url)
 
 const chosenVolume = ref<number>(props.item.volumes.value)
@@ -84,9 +82,13 @@ const nutritionData = computed(() => {
 	return Object.entries(props.item.nutrition).map(([key, value]) => ({
 		title: `nutrition.${key}`,
 		nutritionVariant:
-			chosenVolume.value === props.item.volumes.value ? value.value : value.max
+			chosenVolume.value === props.item.volumes.value ? value.value : value.max,
 	}))
 })
+
+const composition = computed(() =>
+	props.item.composition[lang].split(',').join('/')
+)
 </script>
 
 <template>
@@ -124,7 +126,7 @@ const nutritionData = computed(() => {
 								transform:
 									activeVolumeIndex !== null
 										? `translateX(calc(${activeVolumeIndex * 144}% - 100%))`
-										: 'none'
+										: 'none',
 							}"
 							:class="['bottom-5.5 left-14', 'transition-all duration-300']"
 						/>

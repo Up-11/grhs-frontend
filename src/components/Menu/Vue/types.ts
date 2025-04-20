@@ -12,7 +12,7 @@ export interface IProductCard {
 	price: { value: number; max: number }
 	image: string
 	categoryId: string
-	composition: string[]
+	composition: TextWithLangs
 	volumes: { value: number; max: number }
 	nutrition: INutrition
 }
@@ -28,5 +28,5 @@ export enum NUTRITION {
 	CALORIES = 'nutrition.calories',
 	PROTEINS = 'nutrition.proteins',
 	FATS = 'nutrition.fats',
-	CARBS = 'nutrition.carbs'
+	CARBS = 'nutrition.carbs',
 }
