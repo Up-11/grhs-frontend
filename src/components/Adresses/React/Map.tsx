@@ -30,6 +30,8 @@ export interface IResponseItem {
 	}
 }
 
+const key = '72e15679-8136-4fdb-b72a-1976b9ece78e'
+
 export const GMap = () => {
 	const mapRef = useRef<Map | null>(null)
 	const apiLoadedRef = useRef<boolean>(false)
@@ -54,7 +56,7 @@ export const GMap = () => {
 			promises.push(
 				axios
 					.get(
-						`https://catalog.api.2gis.com/3.0/items?q=Green%20House&location=${center[0]}%2C${center[1]}&key=72e15679-8136-4fdb-b72a-1976b9ece78e&page_size=10&fields=items.point,items.external_content,items.full_address_name,items.org&radius=1000&page=${page}`
+						`https://catalog.api.2gis.com/3.0/items?q=Green%20House&location=${center[0]}%2C${center[1]}&key=${key}&page_size=10&fields=items.point,items.external_content,items.full_address_name,items.org&radius=1000&page=${page}`
 					)
 					.then(response => {
 						if (response.status !== 200) {
@@ -102,7 +104,7 @@ export const GMap = () => {
 			mapRef.current = new mapglAPI.Map('map-container', {
 				center: center,
 				zoom: 15,
-				key: 'e88c4907-b9b7-469d-9f97-80c43198debd',
+				key: key,
 			})
 			apiLoadedRef.current = true
 
