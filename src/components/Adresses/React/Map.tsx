@@ -30,7 +30,7 @@ export interface IResponseItem {
 	}
 }
 
-const key = '72e15679-8136-4fdb-b72a-1976b9ece78e'
+const key = '27c0adff-bbad-4f93-8aaf-6edbe1e57005'
 
 export const GMap = () => {
 	const mapRef = useRef<Map | null>(null)
@@ -39,11 +39,6 @@ export const GMap = () => {
 
 	const [items, setItems] = useState<IResponseItem[]>([])
 
-	const changeCenter = (newCenter: number[]) => {
-		if (center !== newCenter) {
-			setCenter(newCenter)
-		}
-	}
 	const MAX_REQUESTS = 5
 
 	const fetchData = async () => {
