@@ -7,14 +7,14 @@ interface Props {
 }
 
 const {
-	item: { name, categoryId, composition, nutrition, price, volumes }
+	item: { name, categoryId, composition, nutrition, price, volumes },
 } = Astro.props
 
 console.log(Astro.props)
 
 const { t, lang } = useLocale(Astro.url)
 
-const joinedComposition = composition.join(' / ')
+const joinedComposition = composition[lang]
 const joinedVolumes = Object.entries(volumes)
 	.map(([key, value]) => `${t('modal.ml')}: ${value}`)
 	.join(' / ')
